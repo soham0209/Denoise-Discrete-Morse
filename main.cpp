@@ -9,6 +9,7 @@
 #include <map>
 #include <tuple>
 #include <boost/timer/progress_display.hpp>
+#include <chrono>
 #include <algorithm>
 #include "UF.h"
 
@@ -44,7 +45,7 @@ int main(int argc, char *argv[])
     const double delta = std::stod(argv[2]);
     const std::string vert_file = data + "/" + data + "_vert.txt";
     const std::string pers_file = data + "/" + data + ".txt";
-    const std::string bd_file = data + "/regions/" + data + "_regions" + argv[2] + ".txt";
+    const std::string bd_file = data + "/" + data + "_regions" + argv[2] + ".txt";
     const std::string tri_file = data + "/" + data + "_triangulated.txt";
     const std::string ind_file = data + "/" + data + "_indices";
     std::ifstream t_T(tri_file);
@@ -139,6 +140,8 @@ int main(int argc, char *argv[])
     }
     pers.close();
     std::vector<std::pair<Triangulation::Facet, double>> faces;
+
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     for (auto fit = T->finite_facets_begin(); fit != T->finite_facets_end(); fit++)
     {
         faces.emplace_back(std::make_pair(*fit, getFiltration(*fit)));
@@ -219,10 +222,12 @@ int main(int argc, char *argv[])
         pers_tree->merge_y_to_x(root, merged);
     }
 
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
     std::cout << "Number of regions " << reg_tree->cnt << "\nNumber of components " << pers_tree->cnt << std::endl;
     std::cout << "Writing ... " << std::endl;
     writeFaces(bd_file, reg_tree);
+    std::cout << "Time difference (sec) = " <<  (std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()) /1000000.0  <<std::endl;
 
 }
 double getFiltration(Triangulation::Facet fi)
@@ -323,5 +328,6 @@ void writeFaces(const std::string &f_out, UF *reg){
     }
     ofile.close();
     std::cout << "Wrote " << count << " faces to " << f_out << std::endl;
+
 
 }
