@@ -97,5 +97,19 @@ Noisy Dataset           |  Denoised and post-processed
 ![](Noisy_Brain.png)  |  ![](brain.png)
  
 ### Paper
-This paper is submitted in CGI 2021. We are awaiting its review.
+The paper is accepted in CGI 2021. Link [https://link.springer.com/article/10.1007/s00371-021-02255-7](https://link.springer.com/article/10.1007/s00371-021-02255-7)
+
+If you are benefitted from the code, please cite the paper as:
+```
+@article{mukherjee2021denoising,
+  title={Denoising with discrete Morse theory},
+  author={Mukherjee, Soham},
+  journal={The Visual Computer},
+  volume={37},
+  number={9},
+  pages={2883--2894},
+  year={2021},
+  publisher={Springer}
+}
+```
 
