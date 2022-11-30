@@ -4,6 +4,7 @@
 2. Install Boost [Version 1.66.0]
 
 ### Compile Region3D and Refine
+```
 mkdir build
 
 cd build
@@ -11,18 +12,18 @@ cd build
 cmake ..
 
 make
-
+```
 
 ### Refinement
-./Refine \<dataset_name\>
+  ./Refine \<dataset_name\>
 ### Gaussian Field
-python3 data_generator.py \<dataset_name\> \<std_dev\>
+  python data_generator.py \<dataset_name\> \<std_dev\>
 
 ### Denoise
-./Region3D dataset_name threshold
+  ./Region3D dataset_name threshold
 
 ### Extract
-python3 extract_vertices.py \<dataset_name\> delta_for_recon
+  python extract_vertices.py \<dataset_name\> delta_for_recon
 
 This will create a .txt file inside dataset_name directory.
 
@@ -40,6 +41,7 @@ x_1 y_1 z_1
 
 4. For denoising data_generator.py will create a .txt file in the Perseus file format. First line is 3, next line is the number of points. And to be consistent with Perseus format, please put 1 and 1 in the next two lines.
 
+```
 3
 
 Number of points
@@ -55,6 +57,7 @@ val_1
 ...
 
 val_(n-1)
+```
 
 
 4. For Noisy 3D image create a .txt file named dataset_name.txt inside dataset\_name dir.
@@ -76,18 +79,18 @@ These v_ind corresponds to vertices of "\<dir_name\>\_vert.txt"
 ### Example
 #### Denoising
 
-./Refine MotherChild
+  ./Refine MotherChild
 
-python3 data_generator.py MotherChild 24.48
+  python data_generator.py MotherChild 24.48
 
-./Region3D MotherChild 0.0005
+  ./Region3D MotherChild 0.0005
 
-python3 extract_vertices.py MotherChild 0.0005
+  python3 extract_vertices.py MotherChild 0.0005
 
 
 #### Noisy 3D Image
 
-./Region3D Noisy_brain 20
+  ./Region3D Noisy_brain 20
 
 
 #### Denoising results
